@@ -4,12 +4,12 @@ auto="$HOME/.config/autostart/aria2.desktop"
 killall aria2c
 rm $auto -f
 rm $aria2 -rf
-mkdir aria2
+mkdir $aria2
 
 if which apt >/dev/null; then
-    apt install -y aria2
+    sudo apt install -y aria2
 elif which yum >/dev/null; then
-    yum install -y aria2
+    sudo yum install -y aria2
 fi
 
 tee "$aria2/aria2.conf" <<@
@@ -30,7 +30,7 @@ disk-cache=32M
 save-session=$aria2/aria2.session
 save-session-interval=60
 @
-touch "$aria2\aria2.session"
+touch "$aria2/aria2.session"
 
 tee $auto <<@
 [Desktop Entry]
