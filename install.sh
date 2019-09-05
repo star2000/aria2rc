@@ -13,7 +13,7 @@ elif which yum >/dev/null; then
 fi
 
 tee "$aria2/aria2.conf" <<@
-dir=$HOME/downloads
+dir=$(xdg-user-dir DOWNLOAD)
 input-file=$aria2/aria2.session
 log=$aria2/aria2.log
 max-concurrent-downloads=10
