@@ -1,8 +1,10 @@
 aria2="$HOME/.aria2"
+app="$HOME/.local/applications/aria2.desktop"
+auto="$HOME/.config/autostart/aria2.desktop"
 
 pkill aria2c
-rm "$HOME/.local/applications/aria2.desktop" -f
-rm "$HOME/.config/autostart/aria2.desktop" -f
+rm $app -f
+rm $auto -f
 rm $aria2 -rf
 mkdir $aria2
 mkdir "$HOME/.local/applications"
@@ -34,12 +36,12 @@ save-session-interval=60
 @
 touch "$aria2/aria2.session"
 
-tee "$HOME/.local/applications/aria2.desktop" <<@
+tee $app <<@
 [Desktop Entry]
 Name=aria2
 Exec=aria2c
 Type=Application
 @
-ln -s "$HOME/.local/applications/aria2.desktop" "$HOME/.config/autostart"
+ln -s $app $auto
 
 gtk-launch aria2
