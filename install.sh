@@ -7,8 +7,8 @@ rm $app -f
 rm $auto -f
 rm $aria2 -rf
 mkdir $aria2
-mkdir "$HOME/.local/applications" >/dev/null
-mkdir "$HOME/.config/autostart" >/dev/null
+mkdir "$HOME/.local/applications" 2>/dev/null
+mkdir "$HOME/.config/autostart" 2>/dev/null
 
 if which apt >/dev/null; then
     sudo apt install -y aria2
