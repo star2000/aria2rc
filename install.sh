@@ -1,10 +1,11 @@
 aria2="$HOME/.aria2"
 auto="$HOME/.config/autostart/aria2.desktop"
 
-killall aria2c
+pkill aria2c
 rm $auto -f
 rm $aria2 -rf
 mkdir $aria2
+mkdir "$HOME/.config/autostart"
 
 if which apt >/dev/null; then
     sudo apt install -y aria2
