@@ -1,10 +1,11 @@
 aria2="$HOME/.aria2"
-auto="$HOME/.config/autostart/aria2.desktop"
 
 pkill aria2c
-rm $auto -f
+rm "$HOME/.local/applications/aria2.desktop" -f
+rm "$HOME/.config/autostart/aria2.desktop" -f
 rm $aria2 -rf
 mkdir $aria2
+mkdir "$HOME/.local/applications"
 mkdir "$HOME/.config/autostart"
 
 if which apt >/dev/null; then
@@ -33,9 +34,12 @@ save-session-interval=60
 @
 touch "$aria2/aria2.session"
 
-tee $auto <<@
+tee "$HOME/.local/applications/aria2.desktop" <<@
 [Desktop Entry]
 Name=aria2
 Exec=aria2c
+Type=Application
 @
-xdg-open aria2
+ln -s "$HOME/.local/applications/aria2.desktop" "$HOME/.config/autostart"
+
+gtk-launch aria2
