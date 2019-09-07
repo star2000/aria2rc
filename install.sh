@@ -7,8 +7,8 @@ rm $app -f
 rm $auto -f
 rm $aria2 -rf
 mkdir $aria2
-mkdir "$HOME/.local/applications"
-mkdir "$HOME/.config/autostart"
+mkdir "$HOME/.local/applications" >/dev/null
+mkdir "$HOME/.config/autostart" >/dev/null
 
 if which apt >/dev/null; then
     sudo apt install -y aria2
@@ -16,7 +16,7 @@ elif which yum >/dev/null; then
     sudo yum install -y aria2
 fi
 
-tee "$aria2/aria2.conf" <<@
+echo "
 dir=$(xdg-user-dir DOWNLOAD)
 input-file=$aria2/aria2.session
 log=$aria2/aria2.log
@@ -33,15 +33,15 @@ rpc-allow-origin-all=true
 disk-cache=32M
 save-session=$aria2/aria2.session
 save-session-interval=60
-@
+" >"$aria2/aria2.conf"
 touch "$aria2/aria2.session"
 
-tee $app <<@
+echo "
 [Desktop Entry]
 Name=aria2
 Exec=aria2c
 Type=Application
-@
+" >$app
 ln -s $app $auto
 
 gtk-launch aria2

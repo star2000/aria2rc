@@ -4,10 +4,18 @@
 
 ## 用法
 
+### Windows
+
 用`PowerShell`执行
 
 ```ps1
 iwr -useb git.io/aria2rc.ps1 | iex
+```
+
+### Linux
+
+```bash
+wget -qO- git.io/aria2rc.sh | sh
 ```
 
 ## 网页前端
