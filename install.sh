@@ -32,8 +32,8 @@ enable-rpc=true
 rpc-allow-origin-all=true
 
 disk-cache=32M
+force-save=true
 save-session=$aria2/aria2.session
-save-session-interval=60
 " >"$aria2/aria2.conf"
 touch "$aria2/aria2.session"
 
