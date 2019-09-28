@@ -21,7 +21,6 @@ fi
 echo "
 dir=$(xdg-user-dir DOWNLOAD)
 input-file=$aria2/aria2.session
-log=$aria2/aria2.log
 max-concurrent-downloads=10
 continue=true
 

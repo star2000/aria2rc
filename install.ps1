@@ -16,7 +16,6 @@ Remove-Item "$env:TMP\aria2*" -Recurse -Force
 New-Item "$aria2\aria2.conf" -Value @"
 dir=$HOME\Downloads
 input-file=$aria2\aria2.session
-log=$aria2\aria2.log
 max-concurrent-downloads=10
 continue=true
 
