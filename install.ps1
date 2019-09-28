@@ -7,8 +7,8 @@ Remove-Item $aria2 -Recurse -Force | Out-Null
 New-Item $aria2 -ItemType Directory | Out-Null
 
 $arch = if ([IntPtr]::Size -eq 8) { 64 } else { 32 }
-$url = Invoke-WebRequest api.github.com/repos/aria2/aria2/releases/latest -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty assets | Where-Object { $_.name -like "*win-$arch*" } | Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip"
+$url = Invoke-WebRequest api.github.com/repos/aria2/aria2/releases/latest -UseBasicParsing -ErrorAction Stop | ConvertFrom-Json | Select-Object -ExpandProperty assets | Where-Object { $_.name -like "*win-$arch*" } | Select-Object -ExpandProperty browser_download_url
+Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip" -ErrorAction Stop
 Expand-Archive "$env:TMP\aria2.zip" "$env:TMP\aria2"
 Get-ChildItem "$env:TMP\aria2\*\aria2c.exe" | Select-Object -ExpandProperty FullName | Copy-Item -Destination $aria2
 Remove-Item "$env:TMP\aria2*" -Recurse -Force
