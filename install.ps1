@@ -28,7 +28,6 @@ rpc-allow-origin-all=true
 
 disk-cache=32M
 file-allocation=falloc
-force-save=true
 save-session=$aria2\aria2.session
 "@ | Out-Null
 New-Item "$aria2\aria2.session" | Out-Null
