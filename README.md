@@ -25,8 +25,15 @@ wget -qO- git.io/aria2rc.sh | sh
 
 ## 文件路径
 
+### Windows
+
 - 本体：`~\.config\aria2\aria2c.exe`
 - 配置：`~\.config\aria2\aria2.conf`
 - 会话：`~\.config\aria2\aria2.session`
-- 日志：`~\.config\aria2\aria2.log`
 - 自启：`~\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs`
+
+### Linux
+
+- 配置：`~/.aria2/aria2.conf`
+- 会话：`~/.aria2/aria2.session`
+- 自启：`~/.config/autostart/aria2.desktop`
