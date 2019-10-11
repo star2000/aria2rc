@@ -1,4 +1,4 @@
-#Requires -Version 3
+#Requires -Version 5
 
 class Aria2 {
     $path = "$env:USERPROFILE\.config\aria2"
