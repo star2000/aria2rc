@@ -20,8 +20,8 @@ wget -qO- git.io/aria2rc.sh | sh
 
 ## 网页前端
 
-- [AriaNg](http://aria2.net)
-- [yaaw](http://aria2c.com)
+命令执行完成，自动打开<http://aria2.net>，  
+添加书签或创建快捷方式来方便使用。
 
 ## 文件路径
 

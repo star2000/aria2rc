@@ -57,3 +57,5 @@ $aria2.Cleanup()
 $aria2.Install()
 $aria2.Config()
 $aria2.Startup()
+
+Start-Process 'http://aria2.net'

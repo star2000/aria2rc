@@ -45,3 +45,5 @@ Type=Application
 ln -s $app $auto
 
 gtk-launch aria2
+
+xdg-open 'http://aria2.net'
