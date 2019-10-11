@@ -6,7 +6,7 @@
 
 ### Windows
 
-用`PowerShell >= 5.0`执行
+用`PowerShell >= 3`执行
 
 ```ps1
 iwr -useb git.io/aria2rc.ps1 | iex
