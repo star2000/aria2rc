@@ -2,6 +2,7 @@ aria2="$HOME/.aria2"
 app="$HOME/.local/applications/aria2.desktop"
 auto="$HOME/.config/autostart/aria2.desktop"
 
+# Cleanup
 pkill aria2c
 rm $app -f
 rm $auto -f
@@ -10,6 +11,7 @@ mkdir $aria2
 mkdir "$HOME/.local/applications" 2>/dev/null
 mkdir "$HOME/.config/autostart" 2>/dev/null
 
+# Install
 if ! which aria2c >/dev/null; then
     if which apt >/dev/null; then
         sudo apt install -y aria2
@@ -18,6 +20,7 @@ if ! which aria2c >/dev/null; then
     fi
 fi
 
+# Config
 echo "
 dir=$(xdg-user-dir DOWNLOAD)
 input-file=$aria2/aria2.session
@@ -36,6 +39,7 @@ save-session=$aria2/aria2.session
 " >"$aria2/aria2.conf"
 touch "$aria2/aria2.session"
 
+# Startup
 echo "
 [Desktop Entry]
 Name=aria2
