@@ -1,21 +1,33 @@
-$aria2 = "$HOME\.config\aria2"
-$auto = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs"
+#Requires -Version 3
 
-Get-Process aria2c -ErrorAction Ignore | Stop-Process
-Remove-Item $auto -Force | Out-Null
-Remove-Item $aria2 -Recurse -Force | Out-Null
-New-Item $aria2 -ItemType Directory | Out-Null
+class Aria2 {
+    $path = "$env:USERPROFILE\.config\aria2"
+    $auto = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs"
+    $arch = (32, 64)[[System.IntPtr]::Size -eq 8]
 
-$arch = if ([IntPtr]::Size -eq 8) { 64 } else { 32 }
-$url = Invoke-WebRequest api.github.com/repos/aria2/aria2/releases/latest -UseBasicParsing -ErrorAction Stop | ConvertFrom-Json | Select-Object -ExpandProperty assets | Where-Object { $_.name -like "*win-$arch*" } | Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip" -ErrorAction Stop
-Expand-Archive "$env:TMP\aria2.zip" "$env:TMP\aria2"
-Get-ChildItem "$env:TMP\aria2\*\aria2c.exe" | Select-Object -ExpandProperty FullName | Copy-Item -Destination $aria2
-Remove-Item "$env:TMP\aria2*" -Recurse -Force
+    Cleanup() {
+        Get-Process 'aria2c' -ErrorAction Ignore | Stop-Process
+        Remove-Item $this.auto -Force
+        Remove-Item $this.path -Recurse -Force
+        New-Item $this.path -ItemType Directory
+    }
 
-New-Item "$aria2\aria2.conf" -Value @"
-dir=$HOME\Downloads
-input-file=$aria2\aria2.session
+    Install() {
+        $url = Invoke-WebRequest 'api.github.com/repos/aria2/aria2/releases/latest' -UseBasicParsing -ErrorAction Stop | `
+                ConvertFrom-Json | `
+                Select-Object -ExpandProperty assets | `
+                Where-Object { $_.name -like "*win-$($this.arch)*" } | `
+                Select-Object -ExpandProperty browser_download_url
+        Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip" -ErrorAction Stop
+        Expand-Archive "$env:TMP\aria2.zip" $env:TMP
+        Copy-Item "$env:TMP\aria2*\aria2c.exe" $this.path
+        Remove-Item "$env:TMP\aria2*" -Recurse -Force
+    }
+
+    Config() {
+        New-Item "$($this.path)\aria2.conf" -Value @"
+dir=$env:USERPROFILE\Downloads
+input-file=$($this.path)\aria2.session
 max-concurrent-downloads=10
 continue=true
 
@@ -28,9 +40,20 @@ rpc-allow-origin-all=true
 
 disk-cache=32M
 file-allocation=falloc
-save-session=$aria2\aria2.session
-"@ | Out-Null
-New-Item "$aria2\aria2.session" | Out-Null
+save-session=$($this.path)\aria2.session
+"@
+        New-Item "$($this.path)\aria2.session"
+    }
 
-New-Item $auto -Value "CreateObject(`"WScript.Shell`").Run `"$aria2\aria2c.exe`",0" | Out-Null
-cscript.exe $auto | Out-Null
+    Startup() {
+        New-Item $this.auto -Value "CreateObject(`"WScript.Shell`").Run `"$($this.path)\aria2c.exe`",0"
+        cscript.exe $this.auto
+    }
+}
+
+$aria2 = [Aria2]::new()
+
+$aria2.Cleanup()
+$aria2.Install()
+$aria2.Config()
+$aria2.Startup()
