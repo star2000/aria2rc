@@ -1,4 +1,6 @@
-#Requires -Version 3
+#Requires -Version 5
+
+$ErrorActionPreference = 'Stop'
 
 $path = "$env:USERPROFILE\.config\aria2"
 $auto = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs"
@@ -6,17 +8,17 @@ $arch = (32, 64)[[System.IntPtr]::Size -eq 8]
 
 # Cleanup
 Get-Process 'aria2c' -ErrorAction Ignore | Stop-Process
-Remove-Item $auto -Force
-Remove-Item $path -Recurse -Force
+Remove-Item $auto -Force -ErrorAction Ignore
+Remove-Item $path -Recurse -Force -ErrorAction Ignore
 New-Item $path -ItemType Directory | Out-Null
 
 # Install
-$url = Invoke-WebRequest 'api.github.com/repos/aria2/aria2/releases/latest' -UseBasicParsing -ErrorAction Stop | `
+$url = Invoke-WebRequest 'api.github.com/repos/aria2/aria2/releases/latest' -UseBasicParsing | `
         ConvertFrom-Json | `
         Select-Object -ExpandProperty assets | `
         Where-Object { $_.name -like "*win-$arch*" } | `
         Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip" -ErrorAction Stop
+Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip"
 Expand-Archive "$env:TMP\aria2.zip" $env:TMP
 Copy-Item "$env:TMP\aria2*\aria2c.exe" $path
 Remove-Item "$env:TMP\aria2*" -Recurse -Force
