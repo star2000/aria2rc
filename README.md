@@ -12,6 +12,12 @@
 iwr -useb git.io/aria2rc.ps1 | iex
 ```
 
+如果出现`iwr : 请求被中止: 未能创建 SSL/TLS 安全通道。`，执行以下命令后重试。
+
+```ps1
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+```
+
 ### Linux
 
 ```bash
