@@ -14,7 +14,7 @@ New-Item $Aria2Home -ItemType Directory | Out-Null
 
 # Download
 $arch = (32, 64)[[IntPtr]::Size -eq 8]
-(New-Object Net.WebClient).DownloadFile("http://cdn.jsdelivr.net/gh/star2000/aria2rc/aria2c.${arch}bit.exe", $Aria2c)
+(New-Object Net.WebClient).DownloadFile("http://cdn.jsdelivr.net/gh/star2000/aria2rc/aria2c.exe.${arch}bit", $Aria2c)
 
 # Config
 @"
