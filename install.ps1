@@ -33,7 +33,7 @@ rpc-allow-origin-all=true
 disk-cache=32M
 file-allocation=falloc
 save-session=$Aria2Session
-"@
+"@ | Out-Null
 '' > $Aria2Session
 
 # Startup
