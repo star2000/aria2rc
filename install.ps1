@@ -17,7 +17,7 @@ $arch = (32, 64)[[IntPtr]::Size -eq 8]
 (New-Object Net.WebClient).DownloadFile("http://cdn.jsdelivr.net/gh/star2000/aria2rc/aria2c.exe.${arch}bit", $Aria2c)
 
 # Config
-@"
+New-Item $Aria2Config -ItemType File -Value @"
 dir=$DownloadDir
 input-file=$Aria2Session
 max-concurrent-downloads=10
@@ -33,13 +33,13 @@ rpc-allow-origin-all=true
 disk-cache=32M
 file-allocation=falloc
 save-session=$Aria2Session
-"@ > $Aria2Config
+"@
 '' > $Aria2Session
 
 # Startup
-@'
-CreateObject("WScript.Shell").Run "powershell -NoProfile -NonInteractive "cd ~;.\.config\aria2\aria2c.ex"", 0
-'@ > $AutoStart
+@"
+CreateObject("WScript.Shell").Run "$Aria2c", 0
+"@ > $AutoStart
 wscript.exe $AutoStart
 
 Start-Process 'http://aria2.net'
