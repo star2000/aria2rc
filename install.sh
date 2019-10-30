@@ -8,6 +8,7 @@ if ! which aria2c >/dev/null; then
         sudo yum install -y aria2
     fi
 fi
+xdg-user-dirs-update
 
 Aria2Home="$HOME/.aria2"
 Aria2App="$HOME/.local/applications/aria2.desktop"
