@@ -1,0 +1,27 @@
+on:
+  push:
+    paths:
+      - .github/workflows/update-aria2c.yml
+  schedule:
+    - cron: "0 0 1 * *"
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+      - name: 下载源码
+        run: git clone --depth=1 https://github.com/${{ github.repository }} .
+
+      - name: 下载aria2c
+        shell: pwsh
+        run: .\update-aria2c.ps1
+
+      - name: 部署
+        shell: bash
+        run: |
+          if [ "$(git ls-files -m)" ]; then
+            git add .
+            git commit -m '自动更新'
+            git push https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}
+          fi

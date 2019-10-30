@@ -1,32 +1,25 @@
-#Requires -Version 5
-
 $ErrorActionPreference = 'Stop'
 
-$path = "$env:USERPROFILE\.config\aria2"
-$auto = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs"
-$arch = (32, 64)[[System.IntPtr]::Size -eq 8]
+$Aria2Home = "$env:USERPROFILE\.config\aria2"
+$Aria2c = "$Aria2Home\aria2c.exe"
+$Aria2Config = "$Aria2Home\aria2.conf"
+$Aria2Session = "$Aria2Home\aria2.session"
+$AutoStart = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.vbs"
+$DownloadDir = "$env:USERPROFILE\Downloads"
 
 # Cleanup
 Get-Process 'aria2c' -ErrorAction Ignore | Stop-Process
-Remove-Item $auto -Force -ErrorAction Ignore
-Remove-Item $path -Recurse -Force -ErrorAction Ignore
-New-Item $path -ItemType Directory | Out-Null
+Remove-Item $Aria2Home -Recurse -Force -ErrorAction Ignore
+New-Item $Aria2Home -ItemType Directory | Out-Null
 
-# Install
-$url = Invoke-WebRequest 'api.github.com/repos/aria2/aria2/releases/latest' -UseBasicParsing | `
-        ConvertFrom-Json | `
-        Select-Object -ExpandProperty assets | `
-        Where-Object { $_.name -like "*win-$arch*" } | `
-        Select-Object -ExpandProperty browser_download_url
-Invoke-WebRequest $url -UseBasicParsing -OutFile "$env:TMP\aria2.zip"
-Expand-Archive "$env:TMP\aria2.zip" $env:TMP
-Copy-Item "$env:TMP\aria2*\aria2c.exe" $path
-Remove-Item "$env:TMP\aria2*" -Recurse -Force
+# Download
+$arch = (32, 64)[[IntPtr]::Size -eq 8]
+(New-Object Net.WebClient).DownloadFile("http://cdn.jsdelivr.net/gh/star2000/aria2rc/aria2c.${arch}bit.exe", $Aria2c)
 
 # Config
-New-Item "$path\aria2.conf" -Value @"
-dir=$env:USERPROFILE\Downloads
-input-file=$path\aria2.session
+@"
+dir=$DownloadDir
+input-file=$Aria2Session
 max-concurrent-downloads=10
 continue=true
 
@@ -39,12 +32,14 @@ rpc-allow-origin-all=true
 
 disk-cache=32M
 file-allocation=falloc
-save-session=$path\aria2.session
-"@ | Out-Null
-New-Item "$path\aria2.session" | Out-Null
+save-session=$Aria2Session
+"@ > $Aria2Config
+'' > $Aria2Session
 
 # Startup
-New-Item $auto -Value "CreateObject(`"WScript.Shell`").Run `"$path\aria2c.exe`",0" | Out-Null
-cscript.exe $auto | Out-Null
+@'
+CreateObject("WScript.Shell").Run "powershell -NoProfile -NonInteractive "cd ~;.\.config\aria2\aria2c.ex"", 0
+'@ > $AutoStart
+wscript.exe $AutoStart
 
 Start-Process 'http://aria2.net'

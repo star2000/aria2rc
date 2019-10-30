@@ -1,29 +1,31 @@
-aria2="$HOME/.aria2"
-app="$HOME/.local/applications/aria2.desktop"
-auto="$HOME/.config/autostart/aria2.desktop"
-
-# Cleanup
-pkill aria2c
-rm $app -f
-rm $auto -f
-rm $aria2 -rf
-mkdir $aria2
-mkdir "$HOME/.local/applications" 2>/dev/null
-mkdir "$HOME/.config/autostart" 2>/dev/null
-
-# Install
+# Install aria2
 if ! which aria2c >/dev/null; then
-    if which apt >/dev/null; then
+    if which pacman >/dev/null; then
+        sudo pacman -S -–noconfirm aria2
+    elif which apt >/dev/null; then
         sudo apt install -y aria2
     elif which yum >/dev/null; then
         sudo yum install -y aria2
     fi
 fi
 
+Aria2Home="$HOME/.aria2"
+Aria2App="$HOME/.local/applications/aria2.desktop"
+Aria2Config="$Aria2Home/aria2.conf"
+Aria2Session="$Aria2Home/aria2.session"
+AutoStart="$HOME/.config/autostart/aria2.desktop"
+DownloadDir=$(xdg-user-dir DOWNLOAD)
+
+# Cleanup
+pkill aria2c
+mkdir $AriaHome 2>/dev/null
+mkdir "$HOME/.local/applications" 2>/dev/null
+mkdir "$HOME/.config/autostart" 2>/dev/null
+
 # Config
 echo "
-dir=$(xdg-user-dir DOWNLOAD)
-input-file=$aria2/aria2.session
+dir=$DownloadDir
+input-file=$Aria2Session
 max-concurrent-downloads=10
 continue=true
 
@@ -35,9 +37,9 @@ enable-rpc=true
 rpc-allow-origin-all=true
 
 disk-cache=32M
-save-session=$aria2/aria2.session
-" >"$aria2/aria2.conf"
-touch "$aria2/aria2.session"
+save-session=$Aria2Session
+" >$Aria2Config
+echo '' >$Aria2Session
 
 # Startup
 echo "
@@ -45,9 +47,10 @@ echo "
 Name=aria2
 Exec=aria2c
 Type=Application
-" >$app
-ln -s $app $auto
+" >$Aria2App
+ln -sf $Aria2App $AutoStart
 
+# Start
 gtk-launch aria2
 
 xdg-open 'http://aria2.net'

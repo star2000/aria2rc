@@ -6,22 +6,16 @@
 
 ### Windows
 
-用`PowerShell >= 5`执行
+用`PowerShell`执行
 
 ```ps1
-iwr -useb git.io/aria2rc.ps1 | iex
-```
-
-如果出现`iwr : 请求被中止: 未能创建 SSL/TLS 安全通道。`，执行以下命令后重试。
-
-```ps1
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+(New-Object Net.WebClient).DownloadString('http://cdn.jsdelivr.net/gh/star2000/aria2rc/install.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- git.io/aria2rc.sh | sh
+wget -qO- cdn.jsdelivr.net/gh/star2000/aria2rc/install.sh | sh
 ```
 
 ## 网页前端
@@ -40,6 +34,7 @@ wget -qO- git.io/aria2rc.sh | sh
 
 ### Linux
 
+- 本体：`~/.local/applications/aria2.desktop`
 - 配置：`~/.aria2/aria2.conf`
 - 会话：`~/.aria2/aria2.session`
 - 自启：`~/.config/autostart/aria2.desktop`
