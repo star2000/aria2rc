@@ -7,21 +7,23 @@ on:
 
 jobs:
   update:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 下载源码
-        run: git clone --depth=1 https://github.com/${{ github.repository }} .
+        run: git clone --depth=1 ${{ github.repositoryUrl }} .
 
       - name: 下载aria2c
-        shell: pwsh
-        run: .\update-aria2c.ps1
+        run: update-aria2c.sh
+
+      - name: 检查变化
+        run: '[[ $(git status -s) ]]'
 
       - name: 部署
-        shell: bash
+        if: success()
         run: |
-          if [ "$(git ls-files -m)" ]; then
-            git add .
-            git commit -m '自动更新'
-            git push https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}
-          fi
+          git add .
+          git config user.name ${{ github.event.pusher.name }}
+          git config user.email ${{ github.event.pusher.email }}
+          git commit -m '自动更新'
+          git push
