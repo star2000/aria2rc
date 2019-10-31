@@ -25,4 +25,4 @@ jobs:
           git config user.name ${{ github.event.pusher.name }}
           git config user.email ${{ github.event.pusher.email }}
           git commit -m '自动更新'
-          git push
+          git push https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}
