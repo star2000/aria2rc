@@ -20,7 +20,6 @@ jobs:
         run: '[[ $(git status -s) ]]'
 
       - name: 部署
-        if: success()
         run: |
           git add .
           git config user.name ${{ github.event.pusher.name }}
