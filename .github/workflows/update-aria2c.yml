@@ -13,13 +13,14 @@ jobs:
       - name: 下载源码
         run: git clone --depth=1 ${{ github.repositoryUrl }} .
 
-      - name: 下载aria2c
+      - name: 更新
         run: bash update-aria2c.sh
 
-      - name: 检查变化
-        run: '[[ $(git status -s) ]]'
+      - name: 检查
+        run: '[[ -z $(git status -s) ]]'
 
       - name: 部署
+        if: failure()
         run: |
           git add .
           git config user.name ${{ github.event.pusher.name }}
