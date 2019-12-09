@@ -1,5 +1,8 @@
 # aria2rc
 
+[![](https://img.shields.io/badge/dynamic/json?label=Windows&query=files['/install.ps1'].total&url=https://data.jsdelivr.com/v1/package/gh/star2000/aria2rc@1.0.1/stats/year&suffix=%20times/year)](https://www.jsdelivr.com/package/gh/star2000/aria2rc)
+[![](https://img.shields.io/badge/dynamic/json?label=Linux&query=files['/install.sh'].total&url=https://data.jsdelivr.com/v1/package/gh/star2000/aria2rc@1.0.1/stats/year&suffix=%20times/year)](https://www.jsdelivr.com/package/gh/star2000/aria2rc)
+
 安装、配置、自启，全自动。
 
 ## 用法
