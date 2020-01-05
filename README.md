@@ -9,10 +9,10 @@
 
 ### Windows
 
-用`PowerShell`执行
+复制以下命令，按`Win+R`，粘贴，回车
 
 ```ps1
-(New-Object Net.WebClient).DownloadString('http://cdn.jsdelivr.net/gh/star2000/aria2rc/install.ps1') | iex
+powershell (New-Object Net.WebClient).DownloadString('http://cdn.jsdelivr.net/gh/star2000/aria2rc/install.ps1') | iex
 ```
 
 ### Linux
