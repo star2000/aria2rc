@@ -8,8 +8,8 @@ $AutoStart = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.v
 $DownloadDir = "$env:USERPROFILE\Downloads"
 
 # Cleanup
-Get-Process 'aria2c' -ErrorAction Ignore | Stop-Process
-Remove-Item $Aria2Home -Recurse -Force -ErrorAction Ignore
+Get-Process 'aria2c' -ErrorAction SilentlyContinue | Stop-Process
+Remove-Item $Aria2Home -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $Aria2Home -ItemType Directory | Out-Null
 
 # Download
