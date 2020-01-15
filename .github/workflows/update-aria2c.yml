@@ -10,20 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 下载源码
-        run: git clone --depth=1 ${{ github.repositoryUrl }} .
-
-      - name: 更新
-        run: bash update-aria2c.sh
-
-      - name: 检查
-        run: '[[ -z $(git status -s) ]]'
-
-      - name: 部署
-        if: failure()
-        run: |
+      - run: |
+          wget api.github.com/repos/aria2/aria2/releases
+          for arch in 32bit 64bit; do
+            wget -qO '/tmp/aria2.zip' \
+              $(jq -r ".[0].assets[].browser_download_url | select(contains(\"win-$arch\"))" releases)
+            unzip '/tmp/aria2.zip' '*/aria2c.exe' -d '/tmp'
+            mv /tmp/aria2*/aria2c.exe aria2c.exe.$arch
+            rm -rf /tmp/aria2*
+          done
+          rm releases
+          git init
           git add .
           git config user.name ${{ github.event.pusher.name }}
           git config user.email ${{ github.event.pusher.email }}
           git commit -m '自动更新'
-          git push https://${{ secrets.TOKEN }}@github.com/${{ github.repository }}
+          git push -f https://${{ secrets.TOKEN }}@github.com/${{ github.repository }} master:exe
