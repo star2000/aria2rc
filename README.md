@@ -1,7 +1,5 @@
 # aria2rc
 
-[![jsDelivr hits (GitHub)](https://img.shields.io/jsdelivr/gh/hy/star2000/aria2rc)](https://www.jsdelivr.com/package/gh/star2000/aria2rc)
-
 安装、配置、自启，全自动。
 
 ## 用法
