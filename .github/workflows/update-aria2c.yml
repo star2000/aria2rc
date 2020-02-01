@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - run: |
-          wget api.github.com/repos/aria2/aria2/releases
+          wget api.github.com/repos/aria2/aria2/releases?per_page=1
           for arch in 32bit 64bit; do
             wget -qO '/tmp/aria2.zip' \
               $(jq -r ".[0].assets[].browser_download_url | select(contains(\"win-$arch\"))" releases)
@@ -22,7 +22,7 @@ jobs:
           rm releases
           git init
           git add .
-          git config user.name ${{ github.event.pusher.name }}
-          git config user.email ${{ github.event.pusher.email }}
+          git config user.name star2000
+          git config user.email i@star2000.work
           git commit -m '自动更新'
           git push -f https://${{ secrets.TOKEN }}@github.com/${{ github.repository }} master:exe
