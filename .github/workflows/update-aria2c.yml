@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - run: |
-          wget api.github.com/repos/aria2/aria2/releases?per_page=1
+          wget api.github.com/repos/aria2/aria2/releases?per_page=1 -O releases
           for arch in 32bit 64bit; do
             wget -qO '/tmp/aria2.zip' \
               $(jq -r ".[0].assets[].browser_download_url | select(contains(\"win-$arch\"))" releases)
