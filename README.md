@@ -34,7 +34,7 @@ wget -qO- cdn.jsdelivr.net/gh/star2000/aria2rc/install.sh | sh
 
 ### Linux
 
-- 本体：`~/.local/applications/aria2.desktop`
+- 本体：`~/.local/share/applications/aria2.desktop`
 - 配置：`~/.aria2/aria2.conf`
 - 会话：`~/.aria2/aria2.session`
 - 自启：`~/.config/autostart/aria2.desktop`

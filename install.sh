@@ -1,7 +1,7 @@
 # Install aria2
 if ! which aria2c >/dev/null; then
     if which pacman >/dev/null; then
-        sudo pacman -S -–noconfirm aria2
+        sudo pacman -S --noconfirm aria2
     elif which apt >/dev/null; then
         sudo apt install -y aria2
     elif which yum >/dev/null; then
@@ -11,7 +11,7 @@ fi
 xdg-user-dirs-update
 
 Aria2Home="$HOME/.aria2"
-Aria2App="$HOME/.local/applications/aria2.desktop"
+Aria2App="$HOME/.local/share/applications/aria2.desktop"
 Aria2Config="$Aria2Home/aria2.conf"
 Aria2Session="$Aria2Home/aria2.session"
 AutoStart="$HOME/.config/autostart/aria2.desktop"
