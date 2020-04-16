@@ -55,3 +55,6 @@ ln -sf $Aria2App $AutoStart
 gtk-launch aria2
 
 xdg-open 'http://aria2.net'
+
+# Count
+wget -qO- cdn.jsdelivr.net/gh/star2000/count@4/count >/dev/null

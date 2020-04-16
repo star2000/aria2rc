@@ -43,3 +43,6 @@ CreateObject("WScript.Shell").Run "$Aria2c", 0
 wscript.exe $AutoStart
 
 Start-Process 'http://aria2.net'
+
+# Count
+(New-Object Net.WebClient).DownloadString('https://cdn.jsdelivr.net/gh/star2000/count@4/count')
