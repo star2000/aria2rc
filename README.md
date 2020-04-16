@@ -8,14 +8,14 @@
 
 复制以下命令，按`Win+R`，粘贴，回车
 
-```ps1
-powershell (New-Object Net.WebClient).DownloadString('http://cdn.jsdelivr.net/gh/star2000/aria2rc/install.ps1') | iex
+```powershell
+powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/install.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- cdn.jsdelivr.net/gh/star2000/aria2rc/install.sh | sh
+wget -qO- xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/install.sh | sh
 ```
 
 ## 网页前端
