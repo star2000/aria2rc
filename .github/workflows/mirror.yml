@@ -6,4 +6,4 @@ jobs:
     steps:
       - run: |
           git clone --bare ${{ github.repositoryUrl }} .
-          git push --mirror https://${{ secrets.CODING_TOKEN }}@e.coding.net/xing2000/mirrors/aria2rc
+          git push --mirror https://${{ secrets.CODING_TOKEN }}@e.coding.net/xing2000/aria2rc

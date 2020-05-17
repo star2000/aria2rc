@@ -19,13 +19,13 @@
 复制以下命令，按`Win+R`，粘贴，回车
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/install.ps1') | iex
+powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/install.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/install.sh | sh
+wget -qO- xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/install.sh | sh
 ```
 
 ## 卸载
@@ -33,11 +33,11 @@ wget -qO- xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/install.sh | sh
 ### Windows
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/uninstall.ps1') | iex
+powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/uninstall.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- xing2000.coding.net/p/mirrors/d/aria2rc/git/raw/master/uninstall.sh | sh
+wget -qO- xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/uninstall.sh | sh
 ```
