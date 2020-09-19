@@ -48,6 +48,7 @@ echo "
 Name=aria2
 Exec=aria2c
 Type=Application
+NoDisplay=true
 " >$Aria2App
 ln -sf $Aria2App $AutoStart
 
