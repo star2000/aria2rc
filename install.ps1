@@ -14,7 +14,7 @@ New-Item $Aria2Home -ItemType Directory | Out-Null
 
 # Download
 $arch = (32, 64)[[IntPtr]::Size -eq 8]
-(New-Object Net.WebClient).DownloadFile("https://xing2000.coding.net/p/blog/d/static/git/raw/master/aria2c-${arch}bit.exe", $Aria2c)
+(New-Object Net.WebClient).DownloadFile("https://xing2000.coding.net/p/static/d/static/git/raw/master/aria2c-${arch}bit.exe", $Aria2c)
 
 # Config
 New-Item $Aria2Config -ItemType File -Value @"
