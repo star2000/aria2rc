@@ -16,16 +16,16 @@
 
 ### Windows
 
-复制以下命令，按`Win+R`，粘贴，回车
+鼠标移至命令上，连点三次，`Ctrl+C`，`Win+R`，`Ctrl+V`，`Enter`
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/install.ps1') | iex
+powershell (New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/install.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/install.sh | sh
+wget -qO- raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
 ```
 
 ## 卸载
@@ -33,11 +33,11 @@ wget -qO- xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/install.sh | sh
 ### Windows
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/uninstall.ps1') | iex
+powershell (New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/uninstall.ps1') | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- xing2000.coding.net/p/aria2rc/d/aria2rc/git/raw/master/uninstall.sh | sh
+wget -qO- raw.fastgit.org/star2000/aria2rc/master/uninstall.sh | sh
 ```
