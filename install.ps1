@@ -14,6 +14,7 @@ New-Item $Aria2Home -ItemType Directory | Out-Null
 
 # Download
 $arch = (32, 64)[[IntPtr]::Size -eq 8]
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072
 (New-Object Net.WebClient).DownloadFile("https://xing2000.coding.net/p/static/d/static/git/raw/master/aria2c-${arch}bit.exe", $Aria2c)
 
 # Config

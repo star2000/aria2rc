@@ -19,7 +19,7 @@
 鼠标移至命令上，连点三次，`Ctrl+C`，`Win+R`，`Ctrl+V`，`Enter`
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/install.ps1') | iex
+powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072;(New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/install.ps1') | iex
 ```
 
 ### Linux
@@ -33,7 +33,7 @@ wget -qO- raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
 ### Windows
 
 ```powershell
-powershell (New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/uninstall.ps1') | iex
+powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072;(New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/uninstall.ps1') | iex
 ```
 
 ### Linux
