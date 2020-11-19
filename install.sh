@@ -20,7 +20,7 @@ DownloadDir=$(xdg-user-dir DOWNLOAD)
 # Cleanup
 pkill aria2c
 mkdir $Aria2Home 2>/dev/null
-mkdir -p "$HOME/.local/applications" 2>/dev/null
+mkdir -p "$HOME/.local/share/applications" 2>/dev/null
 mkdir -p "$HOME/.config/autostart" 2>/dev/null
 
 # Config
