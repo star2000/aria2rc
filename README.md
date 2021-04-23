@@ -25,7 +25,7 @@ powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManage
 ### Linux
 
 ```bash
-wget -qO- raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
+wget -qO- https://raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
 ```
 
 ## 卸载
@@ -39,5 +39,5 @@ powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManage
 ### Linux
 
 ```bash
-wget -qO- raw.fastgit.org/star2000/aria2rc/master/uninstall.sh | sh
+wget -qO- https://raw.fastgit.org/star2000/aria2rc/master/uninstall.sh | sh
 ```
