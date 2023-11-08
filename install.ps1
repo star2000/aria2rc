@@ -1,6 +1,9 @@
 $ErrorActionPreference = 'Stop'
 
 $Aria2Home = "$env:USERPROFILE\.config\aria2"
+$Aria2LastReleaseUrl = 'https://api.github.com/repos/aria2/aria2/releases/latest'
+$Aria2Zip = "$Aria2Home\aria2.zip"
+$Aria2UnZip = "$Aria2Home\aria2_unzip\"
 $Aria2c = "$Aria2Home\aria2c.exe"
 $Aria2Config = "$Aria2Home\aria2.conf"
 $Aria2Session = "$Aria2Home\aria2.session"
@@ -9,13 +12,19 @@ $DownloadDir = "$env:USERPROFILE\Downloads"
 
 # Cleanup
 Get-Process 'aria2c' -ErrorAction SilentlyContinue | Stop-Process
+Start-Sleep 1
 Remove-Item $Aria2Home -Recurse -Force -ErrorAction SilentlyContinue
 New-Item $Aria2Home -ItemType Directory | Out-Null
 
 # Download
+$LastRelease = Invoke-RestMethod $Aria2LastReleaseUrl
 $arch = (32, 64)[[IntPtr]::Size -eq 8]
-[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072
-(New-Object Net.WebClient).DownloadFile("https://xing2000.coding.net/p/static/d/static/git/raw/master/aria2c-${arch}bit.exe", $Aria2c)
+$asset = $LastRelease.assets | Where-Object { $_.name -match "win-${arch}.*\.zip$" }
+Invoke-WebRequest -UseBasicParsing $asset.browser_download_url -OutFile $Aria2Zip
+Expand-Archive $Aria2Zip $Aria2UnZip
+Remove-Item $Aria2Zip -Force
+Get-ChildItem $Aria2UnZip -Recurse | Where-Object { $_.Extension -eq '.exe' } | ForEach-Object { Move-Item $_.FullName $Aria2c -Force }
+Remove-Item $Aria2UnZip -Recurse -Force -ErrorAction SilentlyContinue
 
 # Config
 New-Item $Aria2Config -ItemType File -Value @"
@@ -43,7 +52,5 @@ CreateObject("WScript.Shell").Run "$Aria2c", 0
 "@ > $AutoStart
 wscript.exe $AutoStart
 
-Start-Process 'http://aria2.net'
-
 # Count
-(New-Object Net.WebClient).DownloadString('https://cdn.jsdelivr.net/gh/star2000/count@4/count')
+Invoke-WebRequest -UseBasicParsing 'https://fastly.jsdelivr.net/gh/star2000/count@4/count' -ErrorAction SilentlyContinue | Out-Null

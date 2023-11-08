@@ -3,5 +3,6 @@ $AutoStart = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\aria2.v
 
 # Remove
 Get-Process 'aria2c' | Stop-Process
+Start-Sleep 1
 Remove-Item $Aria2Home -Recurse -Force
 Remove-Item $AutoStart -Force

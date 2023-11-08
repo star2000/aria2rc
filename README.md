@@ -7,25 +7,28 @@
 
 安装、配置、自启，全自动。
 
+## 安装后如何使用
+
+建议搭配 Microsoft Edge 浏览器的[Aria2 manager](https://microsoftedge.microsoft.com/addons/detail/ojbidmhgnhijiiagnlfnlbhhnkajklcl)插件使用
+
+Aria2 manager 安装后需要到[AriaNg 设置](extension://ojbidmhgnhijiiagnlfnlbhhnkajklcl/ui/ariang/index.html#!/settings/ariang)，将`RPC`页的`Aria2 RPC 地址`行的最左边的空改成`127.0.0.1`
+
+另外建议去[Aria2 manager 配置页](extension://ojbidmhgnhijiiagnlfnlbhhnkajklcl/ui/options.html)勾选`自动拦截下载任务到 Aria2c`
+
 ## 安装
-
-命令执行完成时，自动打开<http://aria2.net>，  
-添加书签或创建快捷方式来方便使用。
-
-或者自行安装浏览器扩展。
 
 ### Windows
 
 鼠标移至命令上，连点三次，`Ctrl+C`，`Win+R`，`Ctrl+V`，`Enter`
 
 ```powershell
-powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072;(New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/install.ps1') | iex
+iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/install.ps1' | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- https://raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
+wget -qO- 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/install.sh' | sh
 ```
 
 ## 卸载
@@ -33,11 +36,11 @@ wget -qO- https://raw.fastgit.org/star2000/aria2rc/master/install.sh | sh
 ### Windows
 
 ```powershell
-powershell [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor 3072;(New-Object Net.WebClient).DownloadString('https://raw.fastgit.org/star2000/aria2rc/master/uninstall.ps1') | iex
+iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/uninstall.ps1' | iex
 ```
 
 ### Linux
 
 ```bash
-wget -qO- https://raw.fastgit.org/star2000/aria2rc/master/uninstall.sh | sh
+wget -qO- 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/uninstall.sh' | sh
 ```
