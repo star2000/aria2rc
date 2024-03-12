@@ -22,7 +22,7 @@ Aria2 manager 安装后需要到[AriaNg 设置](extension://ojbidmhgnhijiiagnlfn
 鼠标移至命令上，连点三次，`Ctrl+C`，`Win+R`，`Ctrl+V`，`Enter`
 
 ```powershell
-iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/install.ps1' | iex
+powershell -NoProfile -Command "& {iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/install.ps1' | iex}"
 ```
 
 ### Linux
@@ -36,7 +36,7 @@ wget -qO- 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/install.sh' | sh
 ### Windows
 
 ```powershell
-iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/uninstall.ps1' | iex
+powershell -NoProfile -Command "& {iwr -useb 'https://fastly.jsdelivr.net/gh/star2000/aria2rc/uninstall.ps1' | iex}"
 ```
 
 ### Linux
